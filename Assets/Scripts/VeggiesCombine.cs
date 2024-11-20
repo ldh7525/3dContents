@@ -11,7 +11,7 @@ public class VeggiesCombine : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!GameOverManager.Instance.isGameOver)
+        if (!GameManager.Instance.isGameOver)
         {
             if (name == other.gameObject.name)
             {
@@ -44,14 +44,14 @@ public class VeggiesCombine : MonoBehaviour
 
     public void StartGrowing(float duration)
     {
-        // 0.4초 동안 점진적으로 원래 크기로 돌아오게 하는 코루틴 시작
+        // 0.15초 동안 점진적으로 원래 크기로 돌아오게 하는 코루틴 시작
         StartCoroutine(GrowToOriginalSize(this.gameObject, duration));
     }
 
     // 점진적으로 원래 크기로 돌아오는 코루틴
     private IEnumerator GrowToOriginalSize(GameObject obj, float duration)
     {
-        Vector3 initialScale = obj.transform.localScale;  // 초기 크기 (1/2 크기)
+        Vector3 initialScale = obj.transform.localScale;  // 초기 크기 (1/2 크기(=부피는 1/8.))
         Vector3 targetScale = (obj.transform.localScale) * 2;  // 목표 크기 (원래 크기)
         float elapsed = 0f;
 
