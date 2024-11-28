@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1732922502784563165}
   - component: {fileID: 3056311511002361128}
   - component: {fileID: 943795941613025379}
+  - component: {fileID: 8935364902201256437}
   m_Layer: 0
   m_Name: layer 3
   m_TagString: Untagged
@@ -83,6 +84,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8935364902201256437
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638620540737807093}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1687187894724005716, guid: 345031c1a68e43e49986ca55254369ae, type: 3}
 --- !u!1 &906453245972585529
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 567329034044851843}
   - component: {fileID: 795692793041245705}
+  - component: {fileID: 7586989107902549583}
   m_Layer: 0
   m_Name: 2 Tomato
   m_TagString: Untagged
@@ -145,6 +169,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7586989107902549583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906453245972585529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a9f9c1134d4de40ae613303328f2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextFruit: {fileID: 7162236845381489711, guid: 82bc687cfdfe7214ba50879e1603bd0b, type: 3}
+  combinationScore: 0
+  isCombined: 0
 --- !u!1 &3349261398965966366
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +195,7 @@ GameObject:
   - component: {fileID: 1993785020919695078}
   - component: {fileID: 5024908475491217558}
   - component: {fileID: 9008676990532134475}
+  - component: {fileID: 327968385056329209}
   m_Layer: 0
   m_Name: layer 2
   m_TagString: Untagged
@@ -228,6 +268,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &327968385056329209
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3349261398965966366}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3032934717660054078, guid: 345031c1a68e43e49986ca55254369ae, type: 3}
 --- !u!1 &6482516777502886284
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +301,7 @@ GameObject:
   - component: {fileID: 7701853112829763029}
   - component: {fileID: 5675498600218455278}
   - component: {fileID: 2579464733374356105}
+  - component: {fileID: 3840809315443938711}
   m_Layer: 0
   m_Name: layer 2_1
   m_TagString: Untagged
@@ -311,3 +374,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3840809315443938711
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6482516777502886284}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8079201012097408807, guid: 345031c1a68e43e49986ca55254369ae, type: 3}
