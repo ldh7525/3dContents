@@ -27,13 +27,13 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        AddScore(addedScore : 0);
+        AddScore(0);
     }
 
     public void AddScore(int addedScore)
     {
         score += addedScore;
-        scoreText.text = "Score:\n" + score;
+        scoreText.text = "Score: " + score;
     }
 
 }

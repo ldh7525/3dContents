@@ -22,12 +22,10 @@ public class VeggiesCombine : MonoBehaviour
                     ScoreManager.Instance.AddScore(combinationScore);
                     if (nextFruit != null)
                     {
-                        // 상위 과일을 1/4 크기로 생성
-                        GameObject spawnedFruit = Instantiate(nextFruit, Vector3.Lerp(transform.position, other.transform.position, 0.5f), Quaternion.identity);
+                        GameObject spawnedFruit = Instantiate(nextFruit, Vector3.Lerp(transform.position, other.transform.position, 0.5f), Quaternion.identity); // 상위 과일을 1/2 크기로 생성
                         spawnedFruit.transform.localScale = nextFruit.transform.localScale * 0.5f; // 초기 크기 설정
 
-                        // 새 과일의 VeggiesCombine 스크립트를 가져와서 코루틴 시작
-                        spawnedFruit.GetComponent<VeggiesCombine>().StartGrowing(0.15f);
+                        spawnedFruit.GetComponent<VeggiesCombine>().StartGrowing(0.15f);  // 새 과일의 VeggiesCombine 스크립트를 가져와서 코루틴 시작
                     }
                     Debug.Log("Starting Coroutine");
                     Destroy(gameObject);

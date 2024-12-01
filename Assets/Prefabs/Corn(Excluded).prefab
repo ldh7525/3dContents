@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: -2446993167694962429}
   - component: {fileID: -2841434378887889131}
   m_Layer: 0
-  m_Name: 6 Corn
+  m_Name: Corn(Excluded)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,8 +502,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a9f9c1134d4de40ae613303328f2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextFruit: {fileID: 0}
-  combinationScore: 0
+  nextFruit: {fileID: 7432622799770361029, guid: 357a35ba3f42e1440a527f495b07910d, type: 3}
+  combinationScore: 6
   isCombined: 0
 --- !u!1 &8372517445788279218
 GameObject:

@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 5431451276817722692}
   - component: {fileID: 1172793611244106729}
   m_Layer: 0
-  m_Name: 7 Carrot
+  m_Name: Carrot(Excluded)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,6 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a9f9c1134d4de40ae613303328f2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextFruit: {fileID: 0}
-  combinationScore: 0
+  nextFruit: {fileID: 7983452726835186071, guid: b8e705e315cf8a040891952b165fcfef, type: 3}
+  combinationScore: 7
   isCombined: 0

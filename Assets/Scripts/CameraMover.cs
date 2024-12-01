@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class CameraController : MonoBehaviour
+public class CameraMover : MonoBehaviour
 {
     public Transform target;  // 중심점
     public float rotationSpeed = 5f;  // 회전 속도
@@ -23,6 +23,7 @@ public class CameraController : MonoBehaviour
 
         transform.LookAt(target);  // 카메라가 중심점을 바라보도록 설정
     }
+
 }
 
 

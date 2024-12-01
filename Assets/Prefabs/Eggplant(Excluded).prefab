@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 8685205990960382395}
   - component: {fileID: 1918821088923082538}
   m_Layer: 0
-  m_Name: 8 Eggplant
+  m_Name: Eggplant(Excluded)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,6 +393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a9f9c1134d4de40ae613303328f2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextFruit: {fileID: 0}
-  combinationScore: 0
+  nextFruit: {fileID: 3861749852540846988, guid: 6d8835d47e6d71849a9fe6ba4d690ff9, type: 3}
+  combinationScore: 8
   isCombined: 0
