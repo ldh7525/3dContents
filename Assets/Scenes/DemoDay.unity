@@ -1984,6 +1984,7 @@ MonoBehaviour:
   launchForce: 2
   maxVerticalAngle: 60
   trajectoryResolution: 50
+  radius: 0.6269989
 --- !u!4 &182703312
 Transform:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class DirectedProjectileShooter : MonoBehaviour
     public float launchForce = 10f;         // 기본 발사 속도
     public float maxVerticalAngle = 60f;    // 최대 발사 각도 (60도)
     public int trajectoryResolution = 50;  // 궤적 점 개수
+    public float radius;
     Vector3 displacement;
 
     void Update()
@@ -19,7 +20,7 @@ public class DirectedProjectileShooter : MonoBehaviour
 
         Vector3 targety0 = new Vector3(targetPoint.position.x, 0f, targetPoint.position.z);
         Vector3 cameray0 = new Vector3(mainCamera.position.x, 0f, mainCamera.position.z);
-        displacement = (targety0 - cameray0).normalized * 0.6269989f;
+        displacement = (targety0 - cameray0).normalized * radius;
     }
 
     void ShootProjectile()
@@ -36,9 +37,10 @@ public class DirectedProjectileShooter : MonoBehaviour
    
 
         // 발사체 생성
-        GameObject projectile = Instantiate(selectedPrefab, mainCamera.position + new Vector3(0.0f, -0.4200002f, 0.0f)+ displacement, Quaternion.identity); // + launchPoint x, z vector3 - camera x z vector3 normalized.
-        Debug.Log(mainCamera.position + new Vector3(0.0f, -0.4200002f, 0.0f) + displacement);
+        GameObject projectile = Instantiate(selectedPrefab, mainCamera.position + new Vector3(0.0f, -0.4200002f, 0.0f)+ displacement, Quaternion.identity); 
+        Debug.Log(mainCamera.position + new Vector3(0.0f, -0.4200002f, 0.0f) + displacement); // 생성지점 테스트용 출력
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+
         if (rb != null)
         {
             rb.velocity = targetDirection * launchForce; // 초기 속도 설정
