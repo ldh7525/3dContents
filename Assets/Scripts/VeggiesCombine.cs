@@ -7,6 +7,7 @@ public class VeggiesCombine : MonoBehaviour
     public GameObject nextFruit;
     public int combinationScore;
     public bool isCombined;
+    public bool canCombine =true;
 
 
     private void OnCollisionEnter(Collision other)
@@ -15,7 +16,7 @@ public class VeggiesCombine : MonoBehaviour
         {
             if (name == other.gameObject.name)
             {
-                if (!isCombined)
+                if (!isCombined && canCombine)
                 {
                     isCombined = true;
                     other.gameObject.GetComponent<VeggiesCombine>().Combine();
@@ -27,7 +28,6 @@ public class VeggiesCombine : MonoBehaviour
 
                         spawnedFruit.GetComponent<VeggiesCombine>().StartGrowing(0.15f);  // 새 과일의 VeggiesCombine 스크립트를 가져와서 코루틴 시작
                     }
-                    Debug.Log("Starting Coroutine");
                     Destroy(gameObject);
                 }
             }
@@ -62,7 +62,6 @@ public class VeggiesCombine : MonoBehaviour
 
         // 루프 종료 후 목표 크기로 명확히 설정
         obj.transform.localScale = targetScale;
-        Debug.Log("1");
     }
 
 }

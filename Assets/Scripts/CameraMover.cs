@@ -10,6 +10,11 @@ public class CameraMover : MonoBehaviour
 
     private float horizontalAngle = 0f;
 
+    private void Awake()
+    {
+        transform.position = (target.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * distance) + new Vector3(0, height, 0));   // 거리는 고정
+    }
+
     void Update()
     {
         // 좌우 방향키 입력을 통한 회전
