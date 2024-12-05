@@ -184,6 +184,7 @@ MonoBehaviour:
   nextFruit: {fileID: 3861749852540846988, guid: 6d8835d47e6d71849a9fe6ba4d690ff9, type: 3}
   combinationScore: 5
   isCombined: 0
+  canCombine: 0
 --- !u!1 &2711566386298603143
 GameObject:
   m_ObjectHideFlags: 0

@@ -150,3 +150,4 @@ MonoBehaviour:
   nextFruit: {fileID: 5808762747920353218, guid: 1cf8ce11929d19e4698c429008616a1f, type: 3}
   combinationScore: 10
   isCombined: 0
+  canCombine: 0

@@ -7,28 +7,44 @@ public class VeggiesCombine : MonoBehaviour
     public GameObject nextFruit;
     public int combinationScore;
     public bool isCombined;
-    public bool canCombine =true;
+    public bool canCombine;
 
 
     private void OnCollisionEnter(Collision other)
+    {
+        HandleCollision(other);
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        HandleCollision(other);
+    }
+
+    private void HandleCollision(Collision other)
     {
         if (!GameManager.Instance.isGameOver)
         {
             if (name == other.gameObject.name)
             {
-                if (!isCombined && canCombine)
+                VeggiesCombine otherVeggie = other.gameObject.GetComponent<VeggiesCombine>();
+                if (otherVeggie != null)
                 {
-                    isCombined = true;
-                    other.gameObject.GetComponent<VeggiesCombine>().Combine();
-                    ScoreManager.Instance.AddScore(combinationScore);
-                    if (nextFruit != null)
+                    if (!isCombined && canCombine && otherVeggie.canCombine)
                     {
-                        GameObject spawnedFruit = Instantiate(nextFruit, Vector3.Lerp(transform.position, other.transform.position, 0.5f), Quaternion.identity); // 상위 과일을 1/2 크기로 생성
-                        spawnedFruit.transform.localScale = nextFruit.transform.localScale * 0.5f; // 초기 크기 설정
+                        isCombined = true;
+                        otherVeggie.Combine();
+                        ScoreManager.Instance.AddScore(combinationScore);
 
-                        spawnedFruit.GetComponent<VeggiesCombine>().StartGrowing(0.15f);  // 새 과일의 VeggiesCombine 스크립트를 가져와서 코루틴 시작
+                        if (nextFruit != null)
+                        {
+                            GameObject spawnedFruit = Instantiate(nextFruit, Vector3.Lerp(transform.position, other.transform.position, 0.5f), Quaternion.identity);
+                            spawnedFruit.transform.localScale = nextFruit.transform.localScale * 0.5f;
+
+                            spawnedFruit.GetComponent<VeggiesCombine>().StartGrowing(0.15f);
+                        }
+
+                        Destroy(gameObject);
                     }
-                    Destroy(gameObject);
                 }
             }
         }

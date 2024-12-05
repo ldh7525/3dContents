@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 public class Shooter : MonoBehaviour
 {
     public GameObject[] projectilePrefabs; // 발사체 프리팹 배열
@@ -41,6 +42,11 @@ public class Shooter : MonoBehaviour
         {
             ShootProjectile(currentProjectile);
             isShootable = false; //발사 쿨타임 0.6초 
+            VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
+            if (veggiesCombine != null && veggiesCombine.canCombine)
+            {
+                veggiesCombine.canCombine = true;
+            }
             StartCoroutine(WaitForShootableAndGenerateProjectile()); // 대기 후 다음꺼에있었던거를 생성/옮기기
 
             //다음꺼에있던거를 current로옮기고, 다음꺼 지정해놓기
@@ -76,6 +82,7 @@ public class Shooter : MonoBehaviour
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.useGravity = false;
         currentProjectile = projectile;
+        VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
     }
 
     void SetNextProjectile()
@@ -98,10 +105,5 @@ public class Shooter : MonoBehaviour
         GenerateProjectile();
         isShootable = true;
         SetNextProjectile();
-        VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
-        if (veggiesCombine != null)
-        {
-            veggiesCombine.canCombine = false;
-        }
     }
 }
