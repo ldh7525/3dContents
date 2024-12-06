@@ -3,17 +3,17 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 public class Shooter : MonoBehaviour
 {
-    public GameObject[] projectilePrefabs; // ¹ß»çÃ¼ ÇÁ¸®ÆÕ ¹è¿­
-    public Transform mainCamera;       // ¹ß»ç Àå¼Ò (°íÁ¤ À§Ä¡)
-    public Transform targetPoint;       // ¸ñÇ¥ ÁöÁ¡ (Æ¯Á¤ ÁöÁ¡)
-    public float launchForce;         // ±âº» ¹ß»ç ¼Óµµ
+    public GameObject[] projectilePrefabs; // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­
+    public Transform mainCamera;       // ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡)
+    public Transform targetPoint;       // ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ (Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+    public float launchForce;         // ï¿½âº» ï¿½ß»ï¿½ ï¿½Óµï¿½
     public float radius;
     public bool isShootable = true;
     public float height;
 
     [SerializeField] private GameObject nextProjectile;
     public GameObject currentProjectile;
-    [SerializeField] Vector3 displacement; //¸ñÇ¥ ÇâÇÑ º¤ÅÍ
+    [SerializeField] Vector3 displacement; //ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private void Awake()
     {
@@ -24,42 +24,45 @@ public class Shooter : MonoBehaviour
 
     void Start()
     {
-        // ¹ß»çÃ¼ ·£´ý ÁöÁ¤(prefab 1~5 Áß¿¡¼­ 1°³)
+        // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(prefab 1~5 ï¿½ß¿ï¿½ï¿½ï¿½ 1ï¿½ï¿½)
         GameObject firstProjectile = RandomPrefab();
-        // ÁöÁ¤µÈ ¹ß»çÃ¼ »ý¼º
-        GameObject projectile = Instantiate(firstProjectile, mainCamera.position + new Vector3(0.0f, height, 0.0f) + displacement, Quaternion.identity);
-        currentProjectile = projectile;
-        Rigidbody rigid = currentProjectile.GetComponent<Rigidbody>();
-        rigid.constraints = RigidbodyConstraints.FreezeAll; //projectile °íÁ¤
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+        GameObject projectile = Instantiate(firstProjectile, transform.position, Quaternion.identity);
+        projectile.transform.parent = gameObject.transform;
 
-        nextProjectile = RandomPrefab(); //´ÙÀ½ ¹ß»çÃ¼ ÁöÁ¤ÇØµÎ±â
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll; //projectile ï¿½ï¿½ï¿½ï¿½
+
+        currentProjectile = projectile;
+        nextProjectile = RandomPrefab(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ØµÎ±ï¿½
     }
 
     void Update()
     {
-        // ¹ß»ç
-        if (Input.GetMouseButtonDown(0) && isShootable) // ¸¶¿ì½º ¿ÞÂÊ Å¬¸¯À¸·Î ¹ß»ç
+        // ï¿½ß»ï¿½
+        if (Input.GetMouseButtonDown(0) && isShootable) // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
         {
             ShootProjectile(currentProjectile);
-            isShootable = false; //¹ß»ç ÄðÅ¸ÀÓ 0.6ÃÊ 
+            isShootable = false; //ï¿½ß»ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ 0.6ï¿½ï¿½ 
             VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
             if (veggiesCombine != null && veggiesCombine.canCombine)
             {
                 veggiesCombine.canCombine = true;
             }
-            StartCoroutine(WaitForShootableAndGenerateProjectile()); // ´ë±â ÈÄ ´ÙÀ½²¨¿¡ÀÖ¾ú´ø°Å¸¦ »ý¼º/¿Å±â±â
+            currentProjectile.transform.SetParent(null);
+            StartCoroutine(WaitForShootableAndGenerateProjectile()); // ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½Å±ï¿½ï¿½
         }
     }
 
     void ShootProjectile(GameObject projectile)
     {
         Rigidbody rigid = projectile.GetComponent<Rigidbody>();
-        rigid.constraints = RigidbodyConstraints.None; //¿òÁ÷ÀÓ °¡´ÉÇÏµµ·Ï È°¼ºÈ­
+        rigid.constraints = RigidbodyConstraints.None; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
 
-        Vector3 targetDirection = (targetPoint.position - mainCamera.position).normalized;        // ¸ñÇ¥ ÁöÁ¡°ú ¹ß»ç Àå¼Ò °£ °Å¸® °è»ê
+        Vector3 targetDirection = (targetPoint.position - transform.position).normalized;        // ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½
         if (rigid != null)
         {
-            rigid.velocity = targetDirection * launchForce; // ÃÊ±â ¼Óµµ ¼³Á¤
+            rigid.velocity = targetDirection * launchForce; // ï¿½Ê±ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         VeggiesCombine veggiesCombine = projectile.GetComponent<VeggiesCombine>();
         if (veggiesCombine != null)
@@ -71,29 +74,30 @@ public class Shooter : MonoBehaviour
     void GenerateProjectile()
     {
         Vector3 targety0 = new Vector3(targetPoint.position.x, 0f, targetPoint.position.z);
-        Vector3 cameray0 = new Vector3(mainCamera.position.x, 0f, mainCamera.position.z);
-        displacement = (targety0 - cameray0).normalized * radius; //xzÆò¸éÀÇ °£°Ý ÁöÁ¤ - radius ¼öÁ¤À¸·Î ºñÀ² Á¶Á¤ °¡´É
+        Vector3 cameray0 = new Vector3(mainCamera.position.x, 0f, transform.position.z);
+        displacement = (targety0 - cameray0).normalized * radius; //xzï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - radius ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+        GameObject projectile = Instantiate(currentProjectile, transform.position, Quaternion.identity);
+        projectile.transform.parent = transform;
 
-        // ÁöÁ¤µÈ ´ÙÀ½ ¹ß»çÃ¼ »ý¼º
-        GameObject projectile = Instantiate(currentProjectile, mainCamera.position + new Vector3(0.0f, height, 0.0f) + displacement, Quaternion.identity);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll; //projectile ï¿½ï¿½ï¿½ï¿½
+
         currentProjectile = projectile;
         VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
-        rb.constraints = RigidbodyConstraints.FreezeAll; //projectile °íÁ¤
     }
 
     void SetNextProjectile()
     {
-        nextProjectile = RandomPrefab(); //´ÙÀ½ ¹ß»çÃ¼ ÁöÁ¤ÇÏ±â
+        nextProjectile = RandomPrefab(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
     }
 
     GameObject RandomPrefab()
     {
-        // ¹ß»çÃ¼ ·£´ý ÁöÁ¤(prefab 1~5 Áß¿¡¼­ 1°³)
+        // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(prefab 1~5 ï¿½ß¿ï¿½ï¿½ï¿½ 1ï¿½ï¿½)
         int randomIndex = Random.Range(0, projectilePrefabs.Length);
-        GameObject selectedPrefab = projectilePrefabs[randomIndex];
-        return selectedPrefab;
+        return projectilePrefabs[randomIndex];
     }
 
     IEnumerator WaitForShootableAndGenerateProjectile()
