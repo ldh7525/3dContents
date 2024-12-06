@@ -5,7 +5,7 @@ public class CameraMover : MonoBehaviour
 {
     Camera mainCamera;
     Shooter shooter;
-    public float rotationSpeed = 30f;  // ȸ�� �ӵ�
+    public float rotationSpeed = 30f;  // rotationSpeed
     public float distance;
     public float height;
     public float shooterDistance;
@@ -22,13 +22,13 @@ public class CameraMover : MonoBehaviour
 
     void Update()
     {
-        // �¿� ����Ű �Է��� ���� ȸ��
+        // rotate with <-, -> or A, D
         horizontalInput = Input.GetAxis("Horizontal");
         horizontalAngle -= horizontalInput * rotationSpeed * Time.deltaTime;
-        Quaternion rotation = Quaternion.Euler(0, horizontalAngle, 0);        // ī�޶� ȸ�� ������Ʈ
+        Quaternion rotation = Quaternion.Euler(0, horizontalAngle, 0); 
+        transform.rotation = rotation;  // rotate
 
-        transform.rotation = rotation;   // �Ÿ��� ����
-        mainCamera.transform.LookAt(transform);  // ī�޶� �߽����� �ٶ󺸵��� ����
+        mainCamera.transform.LookAt(transform);  // mainCamera should look target posizion when its global position moved
     }
 
 }
