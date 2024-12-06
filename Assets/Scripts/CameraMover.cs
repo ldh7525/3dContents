@@ -16,12 +16,15 @@ public class CameraMover : MonoBehaviour
     {
         mainCamera = GetComponentInChildren<Camera>();
         shooter = GetComponentInChildren<Shooter>();
-        mainCamera.transform.position = transform.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * distance) + new Vector3(0, height, 0);   // �Ÿ��� ����
-        shooter.transform.position = transform.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * shooterDistance) - new Vector3(0, transform.position.y - 1.2f, 0);   // �Ÿ��� ����
+        mainCamera.transform.position = transform.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * distance) + new Vector3(0, height, 0);   // mainCameraPos
+        shooter.transform.position = transform.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * shooterDistance) - new Vector3(0, transform.position.y - 1.1f, 0);   // ShooterPos
     }
 
     void Update()
     {
+        //Stop when Gameover
+        if (GameManager.Instance.isGameOver == true) return;
+        
         // rotate with <-, -> or A, D
         horizontalInput = Input.GetAxis("Horizontal");
         horizontalAngle -= horizontalInput * rotationSpeed * Time.deltaTime;
@@ -30,7 +33,6 @@ public class CameraMover : MonoBehaviour
 
         mainCamera.transform.LookAt(transform);  // mainCamera should look target posizion when its global position moved
     }
-
 }
 
 

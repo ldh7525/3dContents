@@ -6,21 +6,19 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreManager : MonoBehaviour
 {
-    // �̱��� �ν��Ͻ��� ���� ���� ������Ƽ
-    public static ScoreManager Instance { get; private set; }    // �̱��� �ν��Ͻ��� ���� ���� ������Ƽ
+    public static ScoreManager Instance { get; private set; }    // Singleton
     public int score;
     public TMP_Text scoreText;
 
     private void Awake()
     {
-        // �̱��� �ν��Ͻ� ����
-        if (Instance == null)
+        if (Instance == null) //Singleton
         {
             Instance = this;
         }
         else
         {
-            Destroy(gameObject); // �̹� �ν��Ͻ��� ������ ��� �� ������Ʈ ����
+            Destroy(gameObject);
         }
     }
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 public class Shooter : MonoBehaviour
@@ -7,23 +8,23 @@ public class Shooter : MonoBehaviour
     public Transform mainCamera;
     public Transform targetPoint;
     public float launchForce;
-    public float radius;
+    public float maxForce = 5.1f;
+    public float minForce = 3.0f;
+    public float elevation =  0f;
+    public float maxElevation = 6.0f;
+    public float minElevation = 3.0f;
+    public float verticalInput = 0f;
+    float ratio = 0f;
     public bool isShootable = true;
-    public float height;
+    public GameObject dirLine;
 
     [SerializeField] private GameObject nextProjectile;
     public GameObject currentProjectile;
-    [SerializeField] Vector3 displacement; //��ǥ ���� ����
-
-    private void Awake()
-    {
-        Vector3 targety0 = new Vector3(targetPoint.position.x, 0f, targetPoint.position.z);
-        Vector3 cameray0 = new Vector3(mainCamera.position.x, 0f, mainCamera.position.z);
-        displacement = (targety0 - cameray0).normalized * radius;
-    }
 
     void Start()
     {
+        elevation = maxElevation;
+        launchForce = minForce;
         // Randomly Choose vegitables form 1 to 5
         GameObject firstProjectile = RandomPrefab();
         // first projectile instantiation
@@ -37,8 +38,27 @@ public class Shooter : MonoBehaviour
         SetNextProjectile(); //determine a next vegitable
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        // Stop when Gameover
+        if (GameManager.Instance.isGameOver) return;
+
+        // ↑, ↓ or W, S to adjust launch direction
+        verticalInput = Input.GetAxisRaw("Vertical");
+        if (verticalInput > 0) //when pressing ↑ or W key
+        {
+            ratio = Mathf.Abs(launchForce - maxForce) / Mathf.Abs(elevation - minElevation);
+            elevation = Mathf.Lerp(elevation, minElevation, Time.deltaTime * 3.0f);
+            launchForce = Mathf.Lerp(launchForce, maxForce, Time.deltaTime * 3.0f * ratio);
+        }
+        else if (verticalInput < 0) //when pressing ↓ or S key
+        {
+            ratio = Mathf.Abs(launchForce - minForce) / Mathf.Abs(elevation - maxElevation);
+            elevation = Mathf.Lerp(elevation, maxElevation, Time.deltaTime * 3.0f);
+            launchForce = Mathf.Lerp(launchForce, minForce, Time.deltaTime * 3.0f * ratio);
+        }
+        dirLine.transform.LookAt(targetPoint.position + new Vector3(0, elevation, 0)); //direction line rotate
+
         // LClick to Shoot
         if (Input.GetMouseButtonDown(0) && isShootable) // isShootable is cool-down
         {
@@ -59,10 +79,10 @@ public class Shooter : MonoBehaviour
         Rigidbody rigid = projectile.GetComponent<Rigidbody>();
         rigid.constraints = RigidbodyConstraints.None; //let vegitables move
 
-        Vector3 targetDirection = (targetPoint.position - transform.position).normalized; //base direction
+        Vector3 targetDirection = (targetPoint.position + new Vector3(0, elevation, 0) - transform.position).normalized; //base direction
         if (rigid != null)
         {
-            rigid.velocity = targetDirection * launchForce; //set velocity
+            rigid.AddForce(targetDirection * launchForce, ForceMode.VelocityChange); //set velocity
         }
         VeggiesCombine veggiesCombine = projectile.GetComponent<VeggiesCombine>();
         if (veggiesCombine != null)
@@ -73,10 +93,6 @@ public class Shooter : MonoBehaviour
 
     void GenerateProjectile()
     {
-        Vector3 targety0 = new Vector3(targetPoint.position.x, 0f, targetPoint.position.z);
-        Vector3 cameray0 = new Vector3(mainCamera.position.x, 0f, transform.position.z);
-        displacement = (targety0 - cameray0).normalized * radius;
-
         // projectile instantiation
         GameObject projectile = Instantiate(currentProjectile, transform.position, Quaternion.identity);
         projectile.transform.parent = transform;
@@ -85,7 +101,6 @@ public class Shooter : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll; //projectile freeze
 
         currentProjectile = projectile;
-        VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
     }
 
     void SetNextProjectile()

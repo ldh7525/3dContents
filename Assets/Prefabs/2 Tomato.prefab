@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 567329034044851843}
   - component: {fileID: 795692793041245705}
   - component: {fileID: 7586989107902549583}
+  - component: {fileID: -30083981261036847}
   m_Layer: 0
   m_Name: 2 Tomato
   m_TagString: Untagged
@@ -150,7 +151,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906453245972585529}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -168,7 +169,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &7586989107902549583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,9 +183,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextFruit: {fileID: 7162236845381489711, guid: 82bc687cfdfe7214ba50879e1603bd0b, type: 3}
+  particle_circle: {fileID: 2917723130580142025, guid: b5ab541f061efd04baf8389b76d42910, type: 3}
   combinationScore: 2
   isCombined: 0
   canCombine: 0
+--- !u!114 &-30083981261036847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906453245972585529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5119250f02f7f47beea4a1f6e1daed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 2
 --- !u!1 &3349261398965966366
 GameObject:
   m_ObjectHideFlags: 0
