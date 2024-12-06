@@ -22,7 +22,7 @@ public class VeggiesCombine : MonoBehaviour
 
     private void HandleCollision(Collision other)
     {
-        if (!GameManager.Instance.isGameOver)
+        if (!GameManager.Instance.isGameOver) 
         {
             if (name == other.gameObject.name)
             {
