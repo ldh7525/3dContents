@@ -8,11 +8,11 @@ public class Shooter : MonoBehaviour
     public Transform mainCamera;
     public Transform targetPoint;
     public float launchForce;
-    public float maxForce = 5.1f;
-    public float minForce = 3.0f;
+    public float maxForce = 5.0f;
+    public float minForce = 4.2f;
     public float elevation =  0f;
     public float maxElevation = 6.0f;
-    public float minElevation = 3.0f;
+    public float minElevation = 1.0f;
     public float verticalInput = 0f;
     float ratio = 0f;
     public bool isShootable = true;
