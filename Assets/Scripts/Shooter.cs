@@ -30,7 +30,7 @@ public class Shooter : MonoBehaviour
         GameObject projectile = Instantiate(firstProjectile, mainCamera.position + new Vector3(0.0f, height, 0.0f) + displacement, Quaternion.identity);
         currentProjectile = projectile;
         Rigidbody rigid = currentProjectile.GetComponent<Rigidbody>();
-        rigid.useGravity = false; //projectile의 중력 비활성화
+        rigid.constraints = RigidbodyConstraints.FreezeAll; //projectile 고정
 
         nextProjectile = RandomPrefab(); //다음 발사체 지정해두기
     }
@@ -56,7 +56,7 @@ public class Shooter : MonoBehaviour
     void ShootProjectile(GameObject projectile)
     {
         Rigidbody rigid = projectile.GetComponent<Rigidbody>();
-        rigid.useGravity = true;//중력 활성화
+        rigid.constraints = RigidbodyConstraints.None; //움직임 가능하도록 활성화
 
         Vector3 targetDirection = (targetPoint.position - mainCamera.position).normalized;        // 목표 지점과 발사 장소 간 거리 계산
         if (rigid != null)
@@ -80,7 +80,6 @@ public class Shooter : MonoBehaviour
         // 지정된 다음 발사체 생성
         GameObject projectile = Instantiate(currentProjectile, mainCamera.position + new Vector3(0.0f, height, 0.0f) + displacement, Quaternion.identity);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        rb.useGravity = false;
         currentProjectile = projectile;
         VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
     }

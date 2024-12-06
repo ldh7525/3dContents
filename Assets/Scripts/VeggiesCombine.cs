@@ -39,7 +39,7 @@ public class VeggiesCombine : MonoBehaviour
                         {
                             GameObject spawnedFruit = Instantiate(nextFruit, Vector3.Lerp(transform.position, other.transform.position, 0.5f), Quaternion.identity);
                             spawnedFruit.transform.localScale = nextFruit.transform.localScale * 0.5f;
-
+                            spawnedFruit.GetComponent<VeggiesCombine>().canCombine = true;
                             spawnedFruit.GetComponent<VeggiesCombine>().StartGrowing(0.15f);
                         }
 
