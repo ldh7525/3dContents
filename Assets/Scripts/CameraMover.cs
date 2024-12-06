@@ -3,30 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 public class CameraMover : MonoBehaviour
 {
-    public Transform target;  // Áß½ÉÁ¡
-    public float rotationSpeed = 5f;  // È¸Àü ¼Óµµ
+    Camera mainCamera;
+    Shooter shooter;
+    public float rotationSpeed = 30f;  // rotationSpeed
     public float distance;
     public float height;
-
+    public float shooterDistance;
     private float horizontalAngle = 0f;
+    float horizontalInput = 0f; //for Cashing
 
     private void Awake()
     {
-        transform.position = (target.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * distance) + new Vector3(0, height, 0));   // °Å¸®´Â °íÁ¤
+        mainCamera = GetComponentInChildren<Camera>();
+        shooter = GetComponentInChildren<Shooter>();
+        mainCamera.transform.position = transform.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * distance) + new Vector3(0, height, 0);   // ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        shooter.transform.position = transform.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * shooterDistance) - new Vector3(0, transform.position.y - 1.2f, 0);   // ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     void Update()
     {
-        // ÁÂ¿ì ¹æÇâÅ° ÀÔ·ÂÀ» ÅëÇÑ È¸Àü
-        float horizontalInput = Input.GetAxis("Horizontal");
-        horizontalAngle += horizontalInput * rotationSpeed * Time.deltaTime;
-        Quaternion rotation = Quaternion.Euler(0, horizontalAngle, 0);        // Ä«¸Þ¶ó È¸Àü ¾÷µ¥ÀÌÆ®
+        // rotate with <-, -> or A, D
+        horizontalInput = Input.GetAxis("Horizontal");
+        horizontalAngle -= horizontalInput * rotationSpeed * Time.deltaTime;
+        Quaternion rotation = Quaternion.Euler(0, horizontalAngle, 0); 
+        transform.rotation = rotation;  // rotate
 
-
-        transform.position = (target.position + (rotation * Vector3.back * distance) + new Vector3(0, height, 0));   // °Å¸®´Â °íÁ¤
-
-
-        transform.LookAt(target);  // Ä«¸Þ¶ó°¡ Áß½ÉÁ¡À» ¹Ù¶óº¸µµ·Ï ¼³Á¤
+        mainCamera.transform.LookAt(transform);  // mainCamera should look target posizion when its global position moved
     }
 
 }

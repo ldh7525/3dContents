@@ -3,17 +3,17 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 public class Shooter : MonoBehaviour
 {
-    public GameObject[] projectilePrefabs; // 발사체 프리팹 배열
-    public Transform mainCamera;       // 발사 장소 (고정 위치)
-    public Transform targetPoint;       // 목표 지점 (특정 지점)
-    public float launchForce;         // 기본 발사 속도
+    public GameObject[] projectilePrefabs;
+    public Transform mainCamera;
+    public Transform targetPoint;
+    public float launchForce;
     public float radius;
     public bool isShootable = true;
     public float height;
 
     [SerializeField] private GameObject nextProjectile;
     public GameObject currentProjectile;
-    [SerializeField] Vector3 displacement; //목표 향한 벡터
+    [SerializeField] Vector3 displacement; //占쏙옙표 占쏙옙占쏙옙 占쏙옙占쏙옙
 
     private void Awake()
     {
@@ -24,42 +24,45 @@ public class Shooter : MonoBehaviour
 
     void Start()
     {
-        // 발사체 랜덤 지정(prefab 1~5 중에서 1개)
+        // Randomly Choose vegitables form 1 to 5
         GameObject firstProjectile = RandomPrefab();
-        // 지정된 발사체 생성
-        GameObject projectile = Instantiate(firstProjectile, mainCamera.position + new Vector3(0.0f, height, 0.0f) + displacement, Quaternion.identity);
-        currentProjectile = projectile;
-        Rigidbody rigid = currentProjectile.GetComponent<Rigidbody>();
-        rigid.constraints = RigidbodyConstraints.FreezeAll; //projectile 고정
+        // first projectile instantiation
+        GameObject projectile = Instantiate(firstProjectile, transform.position, Quaternion.identity);
+        projectile.transform.parent = gameObject.transform;
 
-        nextProjectile = RandomPrefab(); //다음 발사체 지정해두기
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll; //projectile freeze
+
+        currentProjectile = projectile;
+        SetNextProjectile(); //determine a next vegitable
     }
 
     void Update()
     {
-        // 발사
-        if (Input.GetMouseButtonDown(0) && isShootable) // 마우스 왼쪽 클릭으로 발사
+        // LClick to Shoot
+        if (Input.GetMouseButtonDown(0) && isShootable) // isShootable is cool-down
         {
             ShootProjectile(currentProjectile);
-            isShootable = false; //발사 쿨타임 0.6초 
+            isShootable = false; //prevent continuous shoot
             VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
             if (veggiesCombine != null && veggiesCombine.canCombine)
             {
                 veggiesCombine.canCombine = true;
             }
-            StartCoroutine(WaitForShootableAndGenerateProjectile()); // 대기 후 다음꺼에있었던거를 생성/옮기기
+            currentProjectile.transform.SetParent(null);
+            StartCoroutine(WaitForShootableAndGenerateProjectile()); // cool-down start
         }
     }
 
     void ShootProjectile(GameObject projectile)
     {
         Rigidbody rigid = projectile.GetComponent<Rigidbody>();
-        rigid.constraints = RigidbodyConstraints.None; //움직임 가능하도록 활성화
+        rigid.constraints = RigidbodyConstraints.None; //let vegitables move
 
-        Vector3 targetDirection = (targetPoint.position - mainCamera.position).normalized;        // 목표 지점과 발사 장소 간 거리 계산
+        Vector3 targetDirection = (targetPoint.position - transform.position).normalized; //base direction
         if (rigid != null)
         {
-            rigid.velocity = targetDirection * launchForce; // 초기 속도 설정
+            rigid.velocity = targetDirection * launchForce; //set velocity
         }
         VeggiesCombine veggiesCombine = projectile.GetComponent<VeggiesCombine>();
         if (veggiesCombine != null)
@@ -71,29 +74,30 @@ public class Shooter : MonoBehaviour
     void GenerateProjectile()
     {
         Vector3 targety0 = new Vector3(targetPoint.position.x, 0f, targetPoint.position.z);
-        Vector3 cameray0 = new Vector3(mainCamera.position.x, 0f, mainCamera.position.z);
-        displacement = (targety0 - cameray0).normalized * radius; //xz평면의 간격 지정 - radius 수정으로 비율 조정 가능
+        Vector3 cameray0 = new Vector3(mainCamera.position.x, 0f, transform.position.z);
+        displacement = (targety0 - cameray0).normalized * radius;
 
+        // projectile instantiation
+        GameObject projectile = Instantiate(currentProjectile, transform.position, Quaternion.identity);
+        projectile.transform.parent = transform;
 
-        // 지정된 다음 발사체 생성
-        GameObject projectile = Instantiate(currentProjectile, mainCamera.position + new Vector3(0.0f, height, 0.0f) + displacement, Quaternion.identity);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll; //projectile freeze
+
         currentProjectile = projectile;
         VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
-        rb.constraints = RigidbodyConstraints.FreezeAll; //projectile 고정
     }
 
     void SetNextProjectile()
     {
-        nextProjectile = RandomPrefab(); //다음 발사체 지정하기
+        nextProjectile = RandomPrefab();
     }
 
     GameObject RandomPrefab()
     {
-        // 발사체 랜덤 지정(prefab 1~5 중에서 1개)
+        // Randomly Choose vegitables form 1 to 5
         int randomIndex = Random.Range(0, projectilePrefabs.Length);
-        GameObject selectedPrefab = projectilePrefabs[randomIndex];
-        return selectedPrefab;
+        return projectilePrefabs[randomIndex];
     }
 
     IEnumerator WaitForShootableAndGenerateProjectile()
