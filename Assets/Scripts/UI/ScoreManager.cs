@@ -17,7 +17,6 @@ public class ScoreManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬 전환 시에도 인스턴스를 유지
         }
         else
         {

@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class VeggiesCombine : MonoBehaviour
 {
+    private GameManager gameManager;
     public GameObject nextFruit;
     public int combinationScore;
     public bool isCombined;
     public bool canCombine;
 
+    private void Awake()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
     private void OnCollisionEnter(Collision other)
     {
@@ -18,6 +23,12 @@ public class VeggiesCombine : MonoBehaviour
     private void OnCollisionStay(Collision other)
     {
         HandleCollision(other);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Floor")
+            gameManager.OnGameOver();
     }
 
     private void HandleCollision(Collision other)
