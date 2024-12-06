@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class VeggiesCombine : MonoBehaviour
 {
+    private GameManager gameManager;
     public GameObject nextFruit;
     public int combinationScore;
     public bool isCombined;
     public bool canCombine;
 
+    private void Awake()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
     private void OnCollisionEnter(Collision other)
     {
@@ -18,6 +23,12 @@ public class VeggiesCombine : MonoBehaviour
     private void OnCollisionStay(Collision other)
     {
         HandleCollision(other);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Floor")
+            gameManager.OnGameOver();
     }
 
     private void HandleCollision(Collision other)
@@ -58,15 +69,15 @@ public class VeggiesCombine : MonoBehaviour
 
     public void StartGrowing(float duration)
     {
-        // 0.15ÃÊ µ¿¾È Á¡ÁøÀûÀ¸·Î ¿ø·¡ Å©±â·Î µ¹¾Æ¿À°Ô ÇÏ´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        // 0.15ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(GrowToOriginalSize(this.gameObject, duration));
     }
 
-    // Á¡ÁøÀûÀ¸·Î ¿ø·¡ Å©±â·Î µ¹¾Æ¿À´Â ÄÚ·çÆ¾
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾
     private IEnumerator GrowToOriginalSize(GameObject obj, float duration)
     {
-        Vector3 initialScale = obj.transform.localScale;  // ÃÊ±â Å©±â (1/2 Å©±â(=ºÎÇÇ´Â 1/8.))
-        Vector3 targetScale = (obj.transform.localScale) * 2;  // ¸ñÇ¥ Å©±â (¿ø·¡ Å©±â)
+        Vector3 initialScale = obj.transform.localScale;  // ï¿½Ê±ï¿½ Å©ï¿½ï¿½ (1/2 Å©ï¿½ï¿½(=ï¿½ï¿½ï¿½Ç´ï¿½ 1/8.))
+        Vector3 targetScale = (obj.transform.localScale) * 2;  // ï¿½ï¿½Ç¥ Å©ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½)
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -76,7 +87,7 @@ public class VeggiesCombine : MonoBehaviour
             yield return null;
         }
 
-        // ·çÇÁ Á¾·á ÈÄ ¸ñÇ¥ Å©±â·Î ¸íÈ®È÷ ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ç¥ Å©ï¿½ï¿½ï¿½ ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         obj.transform.localScale = targetScale;
     }
 
