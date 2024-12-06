@@ -1037,7 +1037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2092481664}
   rotationSpeed: 80
-  distance: 1.05
+  distance: 1
   height: 0.29
 --- !u!1001 &122206172
 PrefabInstance:

@@ -12,7 +12,7 @@ public class Shooter : MonoBehaviour
     public float height;
 
     [SerializeField] private GameObject nextProjectile;
-    [SerializeField] private GameObject currentProjectile;
+    public GameObject currentProjectile;
     [SerializeField] Vector3 displacement; //목표 향한 벡터
 
     private void Awake()
@@ -48,8 +48,6 @@ public class Shooter : MonoBehaviour
                 veggiesCombine.canCombine = true;
             }
             StartCoroutine(WaitForShootableAndGenerateProjectile()); // 대기 후 다음꺼에있었던거를 생성/옮기기
-
-            //다음꺼에있던거를 current로옮기고, 다음꺼 지정해놓기
         }
     }
 
@@ -82,6 +80,7 @@ public class Shooter : MonoBehaviour
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         currentProjectile = projectile;
         VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
+        rb.constraints = RigidbodyConstraints.FreezeAll; //projectile 고정
     }
 
     void SetNextProjectile()
