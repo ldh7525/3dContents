@@ -10,11 +10,4 @@ public class Floor : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.GetComponent<VeggiesCombine>() != null)
-        {
-            gameManager.OnGameOver();
-        }
-    }
 }
