@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 public class Shooter : MonoBehaviour
@@ -7,24 +8,23 @@ public class Shooter : MonoBehaviour
     public Transform mainCamera;
     public Transform targetPoint;
     public float launchForce;
-    public float radius;
+    public float maxForce = 4.9f;
+    public float minForce = 4.5f;
+    public float elevation =  0f;
+    public float maxElevation = 5.0f;
+    public float minElevation = 1.0f;
+    public float verticalInput = 0f;
     public bool isShootable = true;
-    public float height;
+    public GameObject dirLine;
 
-    [SerializeField] private GameObject nextProjectile;
+    public GameObject nextProjectile;
     public GameObject currentProjectile;
-    [SerializeField] Vector3 displacement; //��ǥ ���� ����
-
-    private void Awake()
-    {
-        Vector3 targety0 = new Vector3(targetPoint.position.x, 0f, targetPoint.position.z);
-        Vector3 cameray0 = new Vector3(mainCamera.position.x, 0f, mainCamera.position.z);
-        displacement = (targety0 - cameray0).normalized * radius;
-    }
 
     void Start()
     {
-        // Randomly Choose vegitables form 1 to 5
+        elevation = maxElevation;
+        launchForce = minForce;
+        // Randomly Choose vegitables form 1 to 4
         GameObject firstProjectile = RandomPrefab();
         // first projectile instantiation
         GameObject projectile = Instantiate(firstProjectile, transform.position, Quaternion.identity);
@@ -37,10 +37,21 @@ public class Shooter : MonoBehaviour
         SetNextProjectile(); //determine a next vegitable
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        // Stop when Gameover
+        if (GameManager.Instance.isGameOver) return;
+
+        // ↑, ↓ or W, S to adjust launch direction
+        verticalInput = Input.GetAxis("Vertical");
+        elevation = elevation - (Time.deltaTime * 3.0f * verticalInput);
+        elevation = Mathf.Clamp(elevation, minElevation, maxElevation);
+        launchForce = launchForce + (Time.deltaTime * 0.3f * verticalInput);
+        launchForce = Mathf.Clamp(launchForce, minForce, maxForce);
+        dirLine.transform.LookAt(targetPoint.position + new Vector3(0, elevation, 0)); //direction line rotate
+
         // LClick to Shoot
-        if (Input.GetMouseButtonDown(0) && isShootable) // isShootable is cool-down
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && isShootable) // isShootable is cool-down
         {
             ShootProjectile(currentProjectile);
             isShootable = false; //prevent continuous shoot
@@ -57,13 +68,12 @@ public class Shooter : MonoBehaviour
     void ShootProjectile(GameObject projectile)
     {
         Rigidbody rigid = projectile.GetComponent<Rigidbody>();
-        rigid.constraints = RigidbodyConstraints.None; //let vegitables move
+        if (rigid == null) {Debug.Log("No rigidbody to shoot"); return;}
 
-        Vector3 targetDirection = (targetPoint.position - transform.position).normalized; //base direction
-        if (rigid != null)
-        {
-            rigid.velocity = targetDirection * launchForce; //set velocity
-        }
+        rigid.constraints = RigidbodyConstraints.None; //let vegitables move
+        Vector3 targetDirection = (targetPoint.position + new Vector3(0, elevation, 0) - transform.position).normalized; //base direction
+        rigid.AddForce(targetDirection * launchForce, ForceMode.VelocityChange); //set velocity
+
         VeggiesCombine veggiesCombine = projectile.GetComponent<VeggiesCombine>();
         if (veggiesCombine != null)
         {
@@ -73,10 +83,6 @@ public class Shooter : MonoBehaviour
 
     void GenerateProjectile()
     {
-        Vector3 targety0 = new Vector3(targetPoint.position.x, 0f, targetPoint.position.z);
-        Vector3 cameray0 = new Vector3(mainCamera.position.x, 0f, transform.position.z);
-        displacement = (targety0 - cameray0).normalized * radius;
-
         // projectile instantiation
         GameObject projectile = Instantiate(currentProjectile, transform.position, Quaternion.identity);
         projectile.transform.parent = transform;
@@ -85,7 +91,6 @@ public class Shooter : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll; //projectile freeze
 
         currentProjectile = projectile;
-        VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
     }
 
     void SetNextProjectile()
@@ -95,7 +100,7 @@ public class Shooter : MonoBehaviour
 
     GameObject RandomPrefab()
     {
-        // Randomly Choose vegitables form 1 to 5
+        // Randomly Choose vegitables form 1 to 4
         int randomIndex = Random.Range(0, projectilePrefabs.Length);
         return projectilePrefabs[randomIndex];
     }
