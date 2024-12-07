@@ -4,60 +4,105 @@ using UnityEngine;
 
 public class VeggiesCombine : MonoBehaviour
 {
-    private GameManager gameManager;
     public GameObject nextFruit;
+    public ParticleSystem particle_circle;
+    private ParticleSystem particle_shiny;
+    private bool isShiny = false;
     public int combinationScore;
     public bool isCombined;
     public bool canCombine;
 
-    private void Awake()
+    // rotten vegitable implement
+    public Renderer rend;
+    public ParticleSystem particle_rot;
+    public float rotDelay = 0f;
+    public float elapsedTime = 0f;
+
+    void Awake()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        rend = GetComponent<Renderer>();
+        particle_shiny = GetComponentInChildren<ParticleSystem>();
+        particle_shiny.gameObject.SetActive(false);
+        // Shiny vegitable determined when it instantiated with the probability of 20%
+        if (Random.Range(1, 101) > 95) 
+        {
+            isShiny = true;
+            particle_shiny.gameObject.SetActive(true);
+        }
+    }
+
+    void Update()
+    {
+        if (canCombine) elapsedTime += Time.deltaTime;
+        if (elapsedTime >= rotDelay)
+        {
+            canCombine = false;
+            elapsedTime = -1.0f;
+            particle_shiny.gameObject.SetActive(false);
+            isShiny = false;
+            Instantiate(particle_rot, transform.position, Quaternion.identity).Play();
+
+            if (rend != null) {rend.material.color *= 0.3f; return;}
+            
+            Renderer[] renderers = GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                // 텍스처를 반 정도 어둡게 변환
+                renderer.material.color *= 0.5f;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        HandleCollision(other);
-    }
+        if (other.gameObject.name == "ClassicRoundTable1" && (GameManager.Instance.isGameOver == false))
+        {
+            Debug.Log("collision to " + other.gameObject.name);
+            GameManager.Instance.OnGameOver();
+        }
 
+        if (name == other.gameObject.name) HandleCollision(other);
+    }
+    /*
     private void OnCollisionStay(Collision other)
     {
         HandleCollision(other);
     }
-
+    */
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Floor")
-            gameManager.OnGameOver();
+        {
+            GameManager.Instance.OnGameOver();
+            Destroy(gameObject);
+        }
     }
 
     private void HandleCollision(Collision other)
     {
-        if (!GameManager.Instance.isGameOver) 
+        if (GameManager.Instance.isGameOver) return;
+        
+        VeggiesCombine otherVeggie = other.gameObject.GetComponent<VeggiesCombine>();
+        if (otherVeggie != null && isCombined != true && canCombine && otherVeggie.canCombine)
         {
-            if (name == other.gameObject.name)
+            if (isShiny)
+                GameManager.Instance.shinyCombine(combinationScore);
+            if (otherVeggie.isShiny)
+                GameManager.Instance.shinyCombine(combinationScore);
+            isCombined = true;
+            otherVeggie.Combine();
+            ScoreManager.Instance.AddScore(combinationScore);
+            Instantiate(particle_circle, Vector3.Lerp(transform.position, other.transform.position, 0.5f), Quaternion.identity).Play();
+
+            if (nextFruit != null) 
             {
-                VeggiesCombine otherVeggie = other.gameObject.GetComponent<VeggiesCombine>();
-                if (otherVeggie != null)
-                {
-                    if (!isCombined && canCombine && otherVeggie.canCombine)
-                    {
-                        isCombined = true;
-                        otherVeggie.Combine();
-                        ScoreManager.Instance.AddScore(combinationScore);
-
-                        if (nextFruit != null)
-                        {
-                            GameObject spawnedFruit = Instantiate(nextFruit, Vector3.Lerp(transform.position, other.transform.position, 0.5f), Quaternion.identity);
-                            spawnedFruit.transform.localScale = nextFruit.transform.localScale * 0.5f;
-                            spawnedFruit.GetComponent<VeggiesCombine>().canCombine = true;
-                            spawnedFruit.GetComponent<VeggiesCombine>().StartGrowing(0.15f);
-                        }
-
-                        Destroy(gameObject);
-                    }
-                }
+                GameObject spawnedFruit = Instantiate(nextFruit, Vector3.Lerp(transform.position, other.transform.position, 0.5f), Quaternion.identity);
+                spawnedFruit.transform.localScale = nextFruit.transform.localScale * 0.5f;
+                spawnedFruit.GetComponent<VeggiesCombine>().canCombine = true;
+                spawnedFruit.GetComponent<VeggiesCombine>().StartGrowing(0.15f);
             }
+
+            Destroy(gameObject);
         }
     }
 
@@ -69,15 +114,14 @@ public class VeggiesCombine : MonoBehaviour
 
     public void StartGrowing(float duration)
     {
-        // 0.15�� ���� ���������� ���� ũ��� ���ƿ��� �ϴ� �ڷ�ƾ ����
+        // Grow time = 0.15f
         StartCoroutine(GrowToOriginalSize(this.gameObject, duration));
     }
 
-    // ���������� ���� ũ��� ���ƿ��� �ڷ�ƾ
     private IEnumerator GrowToOriginalSize(GameObject obj, float duration)
     {
-        Vector3 initialScale = obj.transform.localScale;  // �ʱ� ũ�� (1/2 ũ��(=���Ǵ� 1/8.))
-        Vector3 targetScale = (obj.transform.localScale) * 2;  // ��ǥ ũ�� (���� ũ��)
+        Vector3 initialScale = obj.transform.localScale;
+        Vector3 targetScale = obj.transform.localScale * 2;
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -86,8 +130,6 @@ public class VeggiesCombine : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-
-        // ���� ���� �� ��ǥ ũ��� ��Ȯ�� ����
         obj.transform.localScale = targetScale;
     }
 
