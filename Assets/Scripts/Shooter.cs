@@ -20,6 +20,9 @@ public class Shooter : MonoBehaviour
     public GameObject nextProjectile;
     public GameObject currentProjectile;
 
+    //Force Gauge
+    public ImgsFillDynamic imgsFillDynamic;
+
     void Start()
     {
         elevation = maxElevation;
@@ -49,6 +52,7 @@ public class Shooter : MonoBehaviour
         launchForce = launchForce + (Time.deltaTime * 0.3f * verticalInput);
         launchForce = Mathf.Clamp(launchForce, minForce, maxForce);
         dirLine.transform.LookAt(targetPoint.position + new Vector3(0, elevation, 0)); //direction line rotate
+        imgsFillDynamic.SetValue((launchForce - minForce) / 0.4f, true);
 
         // LClick to Shoot
         if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && isShootable) // isShootable is cool-down
