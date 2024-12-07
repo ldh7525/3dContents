@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3472149568183375485}
   - component: {fileID: 1683422576697639734}
   - component: {fileID: 1978625297730028311}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 630020733950314023}
   - component: {fileID: -8045193299172937936}
   - component: {fileID: 5727915291782842864}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 5 Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 7607881141049924025}
   - component: {fileID: 4155572275515596999}
   - component: {fileID: 8556145285711169985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 6915753454407502787}
   - component: {fileID: 7440088956915686686}
   - component: {fileID: 7742269444077157949}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 1423709032120569260}
   - component: {fileID: 7865521423152310482}
   - component: {fileID: 2542448638912060665}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShinyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

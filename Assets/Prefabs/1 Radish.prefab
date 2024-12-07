@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3737779263055554563}
   - component: {fileID: 1489697687384653128}
   - component: {fileID: 6061841260664772239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: -4926368040063619665}
   - component: {fileID: -8177217769382440974}
   - component: {fileID: -1074645025613747434}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1 Radish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 7666340820081665991}
   - component: {fileID: 4205026398155726521}
   - component: {fileID: 2466374068255822802}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 6535915300867365845}
   - component: {fileID: 8533173771960032660}
   - component: {fileID: 5185420832089917469}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShinyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8560697931234659729}
   - component: {fileID: 5811717454215060755}
   - component: {fileID: 1126225523300635222}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 2026653979161668346}
   - component: {fileID: 5485118741864584068}
   - component: {fileID: 5094524002906252212}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 7074093448998947765}
   - component: {fileID: 1091117770010695030}
   - component: {fileID: 4567253538218687308}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 3 Onion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 570974568432196117}
   - component: {fileID: 6970409547902681856}
   - component: {fileID: 2353808898923929370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 5015617154203264318}
   - component: {fileID: 7127007375593255029}
   - component: {fileID: 8198337257604145697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 1725159751353894810}
   - component: {fileID: 6786233613797621271}
   - component: {fileID: 6423607857472183609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShinyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5433,7 +5433,7 @@ GameObject:
   - component: {fileID: 4122095667468048853}
   - component: {fileID: 5651852510942204942}
   - component: {fileID: 9179849033044860695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
