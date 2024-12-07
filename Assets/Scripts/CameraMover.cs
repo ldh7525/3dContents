@@ -27,7 +27,15 @@ public class CameraMover : MonoBehaviour
         
         // rotate with <-, -> or A, D
         horizontalInput = Input.GetAxis("Horizontal");
-        horizontalAngle -= horizontalInput * rotationSpeed * Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            horizontalAngle -= horizontalInput * rotationSpeed * 2.0f * Time.deltaTime;
+        }
+        else
+        {
+            horizontalAngle -= horizontalInput * rotationSpeed * Time.deltaTime;
+        }
         Quaternion rotation = Quaternion.Euler(0, horizontalAngle, 0); 
         transform.rotation = rotation;  // rotate
 

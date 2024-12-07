@@ -14,7 +14,6 @@ public class Shooter : MonoBehaviour
     public float maxElevation = 5.0f;
     public float minElevation = 1.0f;
     public float verticalInput = 0f;
-    float ratio = 0f;
     public bool isShootable = true;
     public GameObject dirLine;
 
@@ -58,7 +57,7 @@ public class Shooter : MonoBehaviour
         dirLine.transform.LookAt(targetPoint.position + new Vector3(0, elevation, 0)); //direction line rotate
 
         // LClick to Shoot
-        if (Input.GetMouseButtonDown(0) && isShootable) // isShootable is cool-down
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && isShootable) // isShootable is cool-down
         {
             ShootProjectile(currentProjectile);
             isShootable = false; //prevent continuous shoot

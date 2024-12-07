@@ -6,9 +6,23 @@ public class VeggiesCombine : MonoBehaviour
 {
     public GameObject nextFruit;
     public ParticleSystem particle_circle;
+    private ParticleSystem particle_shiny;
+    private bool isShiny = false;
     public int combinationScore;
     public bool isCombined;
     public bool canCombine;
+
+    void Awake()
+    {
+        particle_shiny = GetComponentInChildren<ParticleSystem>();
+        particle_shiny.gameObject.SetActive(false);
+        // Shiny vegitable determined when it instantiated with the probability of 20%
+        if (Random.Range(1, 100) > 95) 
+        {
+            isShiny = true;
+            particle_shiny.gameObject.SetActive(true);
+        }
+    }
 
     private void OnCollisionEnter(Collision other)
     {
