@@ -22,12 +22,12 @@ public class VeggiesCombine : MonoBehaviour
     {
         rend = GetComponent<Renderer>();
         particle_shiny = GetComponentInChildren<ParticleSystem>();
-        particle_shiny.gameObject.SetActive(false);
+        if (particle_shiny != null) particle_shiny.gameObject.SetActive(false);
         // Shiny vegitable determined when it instantiated with the probability of 20%
         if (Random.Range(1, 101) > 95) 
         {
             isShiny = true;
-            particle_shiny.gameObject.SetActive(true);
+            if (particle_shiny != null) particle_shiny.gameObject.SetActive(true);
         }
     }
 
