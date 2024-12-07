@@ -16,7 +16,7 @@ public class VeggiesCombine : MonoBehaviour
     public Renderer rend;
     public ParticleSystem particle_rot;
     public float rotDelay = 0f;
-    private float elapsedTime = 0f;
+    public float elapsedTime = 0f;
 
     void Awake()
     {
@@ -37,7 +37,7 @@ public class VeggiesCombine : MonoBehaviour
         if (elapsedTime >= rotDelay)
         {
             canCombine = false;
-            elapsedTime = 0f;
+            elapsedTime = -1.0f;
             particle_shiny.gameObject.SetActive(false);
             isShiny = false;
             Instantiate(particle_rot, transform.position, Quaternion.identity).Play();
@@ -85,6 +85,10 @@ public class VeggiesCombine : MonoBehaviour
         VeggiesCombine otherVeggie = other.gameObject.GetComponent<VeggiesCombine>();
         if (otherVeggie != null && isCombined != true && canCombine && otherVeggie.canCombine)
         {
+            if (isShiny)
+                GameManager.Instance.shinyCombine(combinationScore);
+            if (otherVeggie.isShiny)
+                GameManager.Instance.shinyCombine(combinationScore);
             isCombined = true;
             otherVeggie.Combine();
             ScoreManager.Instance.AddScore(combinationScore);
