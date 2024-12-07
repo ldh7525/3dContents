@@ -12,15 +12,44 @@ public class VeggiesCombine : MonoBehaviour
     public bool isCombined;
     public bool canCombine;
 
+    // rotten vegitable implement
+    public Renderer rend;
+    public ParticleSystem particle_rot;
+    public float rotDelay = 0f;
+    private float elapsedTime = 0f;
+
     void Awake()
     {
+        rend = GetComponent<Renderer>();
         particle_shiny = GetComponentInChildren<ParticleSystem>();
         particle_shiny.gameObject.SetActive(false);
         // Shiny vegitable determined when it instantiated with the probability of 20%
-        if (Random.Range(1, 100) > 95) 
+        if (Random.Range(1, 101) > 95) 
         {
             isShiny = true;
             particle_shiny.gameObject.SetActive(true);
+        }
+    }
+
+    void Update()
+    {
+        if (canCombine) elapsedTime += Time.deltaTime;
+        if (elapsedTime >= rotDelay)
+        {
+            canCombine = false;
+            elapsedTime = 0f;
+            particle_shiny.gameObject.SetActive(false);
+            isShiny = false;
+            Instantiate(particle_rot, transform.position, Quaternion.identity).Play();
+
+            if (rend != null) {rend.material.color *= 0.3f; return;}
+            
+            Renderer[] renderers = GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                // 텍스처를 반 정도 어둡게 변환
+                renderer.material.color *= 0.5f;
+            }
         }
     }
 
@@ -42,7 +71,8 @@ public class VeggiesCombine : MonoBehaviour
     */
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Floor") {
+        if (other.gameObject.name == "Floor")
+        {
             GameManager.Instance.OnGameOver();
             Destroy(gameObject);
         }

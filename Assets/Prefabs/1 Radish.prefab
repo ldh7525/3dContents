@@ -184,10 +184,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextFruit: {fileID: 906453245972585529, guid: 00caac431abf7f948a559001b86d5377, type: 3}
   particle_circle: {fileID: 2917723130580142025, guid: b5ab541f061efd04baf8389b76d42910, type: 3}
-  particle_shiny: {fileID: 0}
   combinationScore: 1
   isCombined: 0
   canCombine: 0
+  rend: {fileID: 0}
+  particle_rot: {fileID: 8481532421527051430, guid: 1809ae73af88d804296ed636d5b02026, type: 3}
+  rotDelay: 30
 --- !u!114 &-1074645025613747434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,7 +596,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2

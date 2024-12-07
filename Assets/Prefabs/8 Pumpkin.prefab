@@ -4978,6 +4978,9 @@ MonoBehaviour:
   combinationScore: 11
   isCombined: 0
   canCombine: 0
+  rend: {fileID: 0}
+  particle_rot: {fileID: 8481532421527051430, guid: 1809ae73af88d804296ed636d5b02026, type: 3}
+  rotDelay: 480
 --- !u!114 &-6949233838471467850
 MonoBehaviour:
   m_ObjectHideFlags: 0

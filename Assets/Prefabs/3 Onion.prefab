@@ -296,6 +296,9 @@ MonoBehaviour:
   combinationScore: 3
   isCombined: 0
   canCombine: 0
+  rend: {fileID: 0}
+  particle_rot: {fileID: 8481532421527051430, guid: 1809ae73af88d804296ed636d5b02026, type: 3}
+  rotDelay: 30
 --- !u!114 &4567253538218687308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,7 +811,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2

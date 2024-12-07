@@ -43,17 +43,11 @@ public class Shooter : MonoBehaviour
         if (GameManager.Instance.isGameOver) return;
 
         // ↑, ↓ or W, S to adjust launch direction
-        verticalInput = Input.GetAxisRaw("Vertical");
-        if (verticalInput > 0) //when pressing ↑ or W key
-        {
-            elevation = Mathf.Lerp(elevation, minElevation, Time.deltaTime * 3.0f);
-            launchForce = Mathf.Lerp(launchForce, maxForce, Time.deltaTime * 3.0f);
-        }
-        else if (verticalInput < 0) //when pressing ↓ or S key
-        {
-            elevation = Mathf.Lerp(elevation, maxElevation, Time.deltaTime * 3.0f);
-            launchForce = Mathf.Lerp(launchForce, minForce, Time.deltaTime * 3.0f);
-        }
+        verticalInput = Input.GetAxis("Vertical");
+        elevation = elevation - (Time.deltaTime * 3.0f * verticalInput);
+        elevation = Mathf.Clamp(elevation, minElevation, maxElevation);
+        launchForce = launchForce + (Time.deltaTime * 0.3f * verticalInput);
+        launchForce = Mathf.Clamp(launchForce, minForce, maxForce);
         dirLine.transform.LookAt(targetPoint.position + new Vector3(0, elevation, 0)); //direction line rotate
 
         // LClick to Shoot
@@ -74,13 +68,12 @@ public class Shooter : MonoBehaviour
     void ShootProjectile(GameObject projectile)
     {
         Rigidbody rigid = projectile.GetComponent<Rigidbody>();
-        rigid.constraints = RigidbodyConstraints.None; //let vegitables move
+        if (rigid == null) {Debug.Log("No rigidbody to shoot"); return;}
 
+        rigid.constraints = RigidbodyConstraints.None; //let vegitables move
         Vector3 targetDirection = (targetPoint.position + new Vector3(0, elevation, 0) - transform.position).normalized; //base direction
-        if (rigid != null)
-        {
-            rigid.AddForce(targetDirection * launchForce, ForceMode.VelocityChange); //set velocity
-        }
+        rigid.AddForce(targetDirection * launchForce, ForceMode.VelocityChange); //set velocity
+
         VeggiesCombine veggiesCombine = projectile.GetComponent<VeggiesCombine>();
         if (veggiesCombine != null)
         {
