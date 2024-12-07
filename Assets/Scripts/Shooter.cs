@@ -8,24 +8,24 @@ public class Shooter : MonoBehaviour
     public Transform mainCamera;
     public Transform targetPoint;
     public float launchForce;
-    public float maxForce = 5.0f;
-    public float minForce = 4.2f;
+    public float maxForce = 4.9f;
+    public float minForce = 4.5f;
     public float elevation =  0f;
-    public float maxElevation = 6.0f;
+    public float maxElevation = 5.0f;
     public float minElevation = 1.0f;
     public float verticalInput = 0f;
     float ratio = 0f;
     public bool isShootable = true;
     public GameObject dirLine;
 
-    [SerializeField] private GameObject nextProjectile;
+    public GameObject nextProjectile;
     public GameObject currentProjectile;
 
     void Start()
     {
         elevation = maxElevation;
         launchForce = minForce;
-        // Randomly Choose vegitables form 1 to 5
+        // Randomly Choose vegitables form 1 to 4
         GameObject firstProjectile = RandomPrefab();
         // first projectile instantiation
         GameObject projectile = Instantiate(firstProjectile, transform.position, Quaternion.identity);
@@ -47,15 +47,13 @@ public class Shooter : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
         if (verticalInput > 0) //when pressing ↑ or W key
         {
-            ratio = Mathf.Abs(launchForce - maxForce) / Mathf.Abs(elevation - minElevation);
             elevation = Mathf.Lerp(elevation, minElevation, Time.deltaTime * 3.0f);
-            launchForce = Mathf.Lerp(launchForce, maxForce, Time.deltaTime * 3.0f * ratio);
+            launchForce = Mathf.Lerp(launchForce, maxForce, Time.deltaTime * 3.0f);
         }
         else if (verticalInput < 0) //when pressing ↓ or S key
         {
-            ratio = Mathf.Abs(launchForce - minForce) / Mathf.Abs(elevation - maxElevation);
             elevation = Mathf.Lerp(elevation, maxElevation, Time.deltaTime * 3.0f);
-            launchForce = Mathf.Lerp(launchForce, minForce, Time.deltaTime * 3.0f * ratio);
+            launchForce = Mathf.Lerp(launchForce, minForce, Time.deltaTime * 3.0f);
         }
         dirLine.transform.LookAt(targetPoint.position + new Vector3(0, elevation, 0)); //direction line rotate
 
@@ -110,7 +108,7 @@ public class Shooter : MonoBehaviour
 
     GameObject RandomPrefab()
     {
-        // Randomly Choose vegitables form 1 to 5
+        // Randomly Choose vegitables form 1 to 4
         int randomIndex = Random.Range(0, projectilePrefabs.Length);
         return projectilePrefabs[randomIndex];
     }

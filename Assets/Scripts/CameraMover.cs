@@ -6,9 +6,9 @@ public class CameraMover : MonoBehaviour
     Camera mainCamera;
     Shooter shooter;
     public float rotationSpeed = 30f;  // rotationSpeed
-    public float distance;
-    public float height;
-    public float shooterDistance;
+    public float distance = 1.25f;
+    public float height = 0.25f;
+    public float shooterDistance = 0.6f;
     private float horizontalAngle = 0f;
     float horizontalInput = 0f; //for Cashing
 
@@ -17,7 +17,7 @@ public class CameraMover : MonoBehaviour
         mainCamera = GetComponentInChildren<Camera>();
         shooter = GetComponentInChildren<Shooter>();
         mainCamera.transform.position = transform.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * distance) + new Vector3(0, height, 0);   // mainCameraPos
-        shooter.transform.position = transform.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * shooterDistance) - new Vector3(0, transform.position.y - 1.1f, 0);   // ShooterPos
+        shooter.transform.position = transform.position + (Quaternion.Euler(0, horizontalAngle, 0) * Vector3.back * shooterDistance) - new Vector3(0, transform.position.y - 1.15f, 0);   // ShooterPos
     }
 
     void Update()
