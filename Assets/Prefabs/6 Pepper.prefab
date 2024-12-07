@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5391598749118168409}
   - component: {fileID: 1940452335844967463}
   - component: {fileID: 7325624610133345198}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 8989150538791628579}
   - component: {fileID: 4901834584205326846}
   - component: {fileID: 4448344331673742411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 134487711356119014}
   - component: {fileID: 5632164828837657819}
   - component: {fileID: 3187875937876633712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShinyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5121,7 +5121,7 @@ GameObject:
   - component: {fileID: 1398891374754198173}
   - component: {fileID: 3754566143950710742}
   - component: {fileID: 6579105392225387339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5227,7 +5227,7 @@ GameObject:
   - component: {fileID: -8693840127756173169}
   - component: {fileID: -2617458825224313899}
   - component: {fileID: -6509693328950993631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 6 Pepper
   m_TagString: Untagged
   m_Icon: {fileID: 0}

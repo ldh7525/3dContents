@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3056311511002361128}
   - component: {fileID: 943795941613025379}
   - component: {fileID: 8935364902201256437}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 795692793041245705}
   - component: {fileID: 7586989107902549583}
   - component: {fileID: -30083981261036847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2 Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 5024908475491217558}
   - component: {fileID: 9008676990532134475}
   - component: {fileID: 327968385056329209}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 5675498600218455278}
   - component: {fileID: 2579464733374356105}
   - component: {fileID: 3840809315443938711}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 6810303705687486324}
   - component: {fileID: 2332474315041058163}
   - component: {fileID: 6125531217774508843}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShinyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

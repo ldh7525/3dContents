@@ -16,6 +16,7 @@ public class Shooter : MonoBehaviour
     public float verticalInput = 0f;
     public bool isShootable = true;
     public GameObject dirLine;
+    private bool shouldShoot = false;
 
     public GameObject nextProjectile;
     public GameObject currentProjectile;
@@ -37,7 +38,7 @@ public class Shooter : MonoBehaviour
         SetNextProjectile(); //determine a next vegitable
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // Stop when Gameover
         if (GameManager.Instance.isGameOver) return;
@@ -57,9 +58,23 @@ public class Shooter : MonoBehaviour
         dirLine.transform.LookAt(targetPoint.position + new Vector3(0, elevation, 0)); //direction line rotate
 
         // LClick to Shoot
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && isShootable) // isShootable is cool-down
+        // 입력 처리
+        if (Input.GetMouseButtonDown(0) && isShootable)
         {
+            shouldShoot = true;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (GameManager.Instance.isGameOver) return;
+
+        // 물리 처리
+        if (shouldShoot)
+        {
+            shouldShoot = false; // 플래그 초기화
             ShootProjectile(currentProjectile);
+
             isShootable = false; //prevent continuous shoot
             VeggiesCombine veggiesCombine = currentProjectile.GetComponent<VeggiesCombine>();
             if (veggiesCombine != null && veggiesCombine.canCombine)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7657120800777867447}
   - component: {fileID: 7109457577432048821}
   - component: {fileID: 4523908186397409984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShinyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4912,7 +4912,7 @@ GameObject:
   - component: {fileID: 863866798654183266}
   - component: {fileID: 8182927420722519480}
   - component: {fileID: -3957483593750027323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 7 Cabbage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

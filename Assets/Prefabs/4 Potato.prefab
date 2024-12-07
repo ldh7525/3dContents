@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6160031398306698811}
   - component: {fileID: 1220897822483567983}
   - component: {fileID: 3473458835406122345}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 4 Potato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 4223440237569682687}
   - component: {fileID: 2871656005098919592}
   - component: {fileID: 6534338238249759999}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShinyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

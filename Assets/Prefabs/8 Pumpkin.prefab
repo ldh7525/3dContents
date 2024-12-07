@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5503063864937903295}
   - component: {fileID: 2085972325215930066}
   - component: {fileID: 2726093815939056488}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShinyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4909,7 +4909,7 @@ GameObject:
   - component: {fileID: 3524188474896389077}
   - component: {fileID: -4470444745475238698}
   - component: {fileID: -6949233838471467850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 8 Pumpkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5003,7 +5003,7 @@ GameObject:
   - component: {fileID: 8530578270903154387}
   - component: {fileID: 5841601878339494808}
   - component: {fileID: 2025132070710150643}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5109,7 +5109,7 @@ GameObject:
   - component: {fileID: 3447964602580416791}
   - component: {fileID: 9216248202096803945}
   - component: {fileID: 740109692912586803}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
