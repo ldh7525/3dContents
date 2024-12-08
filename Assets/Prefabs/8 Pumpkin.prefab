@@ -4942,7 +4942,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5808762747920353218}
   serializedVersion: 4
-  m_Mass: 8
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4981,6 +4981,7 @@ MonoBehaviour:
   rend: {fileID: 0}
   particle_rot: {fileID: 8481532421527051430, guid: 1809ae73af88d804296ed636d5b02026, type: 3}
   rotDelay: 480
+  elapsedTime: 0
 --- !u!114 &-6949233838471467850
 MonoBehaviour:
   m_ObjectHideFlags: 0
