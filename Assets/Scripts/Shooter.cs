@@ -57,7 +57,7 @@ public class Shooter : MonoBehaviour
 
         // LClick to Shoot
         // 입력 처리
-        if (Input.GetMouseButtonDown(0) && isShootable)
+        if (Input.GetMouseButtonDown(0) && isShootable && !GameManager.Instance.isPaused)
         {
             shouldShoot = true;
         }
