@@ -53,11 +53,11 @@ public class Shooter : MonoBehaviour
         launchForce = launchForce + (Time.deltaTime * 0.3f * verticalInput);
         launchForce = Mathf.Clamp(launchForce, minForce, maxForce);
         dirLine.transform.LookAt(targetPoint.position + new Vector3(0, elevation, 0)); //direction line rotate
-        imgsFillDynamic.SetValue((launchForce - minForce) / 0.4f, true);
+        imgsFillDynamic.SetValue(Mathf.Max(0.01f, (launchForce - minForce) / 0.4f), true);
 
         // LClick to Shoot
         // 입력 처리
-        if (Input.GetMouseButtonDown(0) && isShootable && !GameManager.Instance.isPaused)
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && isShootable && !GameManager.Instance.isPaused)
         {
             shouldShoot = true;
         }

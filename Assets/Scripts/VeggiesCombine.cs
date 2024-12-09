@@ -24,7 +24,7 @@ public class VeggiesCombine : MonoBehaviour
         particle_shiny = GetComponentInChildren<ParticleSystem>();
         if (particle_shiny != null) particle_shiny.gameObject.SetActive(false);
         // Shiny vegitable determined when it instantiated with the probability of 20%
-        if (Random.Range(1, 101) > 95) 
+        if (Random.Range(0, 100) >= 80) 
         {
             isShiny = true;
             if (particle_shiny != null) particle_shiny.gameObject.SetActive(true);
@@ -33,6 +33,7 @@ public class VeggiesCombine : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isPaused) return;
         if (canCombine) elapsedTime += Time.deltaTime;
         if (elapsedTime >= rotDelay)
         {

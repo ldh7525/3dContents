@@ -6,18 +6,18 @@ using System.Collections;
 
 public class FadeController : MonoBehaviour
 {
-    public Image fadeImage; // °ËÀº Image
-    public float fadeDuration; // ÆäÀÌµå ½Ã°£
+    public Image fadeImage; // ï¿½ï¿½ï¿½ï¿½ Image
+    public float fadeDuration; // ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ã°ï¿½
 
     private void Start()
     {
-        // ÃÊ±âÈ­: ÆäÀÌµåÀÎ È¿°ú
+        // ï¿½Ê±ï¿½È­: ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ È¿ï¿½ï¿½
         StartCoroutine(FadeIn());
     }
 
     public void ChangeScene(string sceneName)
     {
-        // Scene ÀüÈ¯
+        // Scene ï¿½ï¿½È¯
         StartCoroutine(FadeOut(sceneName));
     }
 
@@ -28,12 +28,12 @@ public class FadeController : MonoBehaviour
 
         while (color.a > 0f)
         {
-            color.a -= Time.deltaTime / fadeDuration; // ÀÏÁ¤·® °¨¼Ò
+            color.a -= Time.deltaTime / fadeDuration; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             fadeImage.color = color;
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓÀ¸·Î ´ë±â
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
 
-        color.a = 0f; // ¿ÏÀü Åõ¸íÀ¸·Î ¼³Á¤
+        color.a = 0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         fadeImage.color = color;
     }
 
@@ -44,12 +44,12 @@ public class FadeController : MonoBehaviour
 
         while (color.a < 1f)
         {
-            color.a += Time.deltaTime / fadeDuration; // ÀÏÁ¤·® Áõ°¡
+            color.a += Time.deltaTime / fadeDuration; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             fadeImage.color = color;
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓÀ¸·Î ´ë±â
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
 
-        color.a = 1f; // ¿ÏÀü ºÒÅõ¸íÀ¸·Î ¼³Á¤
+        color.a = 1f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         fadeImage.color = color;
 
         SceneManager.LoadScene(sceneName);
