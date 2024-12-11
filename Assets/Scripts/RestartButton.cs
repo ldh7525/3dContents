@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class RestartButton : MonoBehaviour
 {
-
     public void OnButtonClick()
     {
         // current active scene reload
