@@ -190,8 +190,8 @@ MonoBehaviour:
   canCombine: 0
   rend: {fileID: 0}
   particle_rot: {fileID: 8481532421527051430, guid: 1809ae73af88d804296ed636d5b02026, type: 3}
-  rotDelay: 60
-  elapsedTime: 0
+  rotTurn: 30
+  isElapsed: 0
 --- !u!114 &5727915291782842864
 MonoBehaviour:
   m_ObjectHideFlags: 0

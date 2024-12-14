@@ -15,8 +15,9 @@ public class VeggiesCombine : MonoBehaviour
     // rotten vegitable implement
     public Renderer rend;
     public ParticleSystem particle_rot;
-    public float rotDelay = 0f;
-    public float elapsedTime = 0f;
+    public int rotTurn;
+    public bool isElapsed = false;
+    public static int turn = 0;
 
     void Awake()
     {
@@ -27,18 +28,22 @@ public class VeggiesCombine : MonoBehaviour
         if (Random.Range(0, 100) >= 80) 
         {
             isShiny = true;
+            rotTurn *= 2;
             if (particle_shiny != null) particle_shiny.gameObject.SetActive(true);
         }
+
+        rotTurn = turn + (int)(1.0f * rotTurn * (800 - turn) / 1000);
+
     }
 
     void Update()
     {
         if (GameManager.Instance.isGameOver || GameManager.Instance.isPaused) return;
-        if (canCombine) elapsedTime += Time.deltaTime;
-        if (elapsedTime >= rotDelay)
+
+        if (canCombine && !isElapsed && turn >= rotTurn)
         {
             canCombine = false;
-            elapsedTime = -1.0f;
+            isElapsed = true;
             particle_shiny.gameObject.SetActive(false);
             isShiny = false;
             Instantiate(particle_rot, transform.position, Quaternion.identity).Play();

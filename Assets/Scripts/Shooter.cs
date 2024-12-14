@@ -71,6 +71,7 @@ public class Shooter : MonoBehaviour
         if (shouldShoot)
         {
             shouldShoot = false; // 플래그 초기화
+            VeggiesCombine.turn += 1;
             ShootProjectile(currentProjectile);
 
             isShootable = false; //prevent continuous shoot

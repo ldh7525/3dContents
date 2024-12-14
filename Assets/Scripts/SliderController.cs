@@ -68,7 +68,16 @@ public class SliderController : MonoBehaviour
     private void Update()
     {
         float v = (float)GameManager.Instance.skillGauge / GameManager.Instance.skillGaugeMax;
-        slider.value = Mathf.Clamp(v, slider.minValue, slider.maxValue);
+        float d = v - slider.value;
+
+        if (Mathf.Abs(d) > 0.001f)
+        {
+            slider.value += (Mathf.Abs(d) + 0.1f) * Time.deltaTime * (d >= 0 ? 1.0f : -1.0f);
+        }
+        else
+        {
+            slider.value = v;
+        }
 
         fillImage.color = gradient.Evaluate(slider.value);
     }
