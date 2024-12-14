@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/AssetsFromStore/2D Progress Bar Toolkit.meta
 guid: 0ea0edb97939b495dbad02d73128e153
+=======
+guid: d38c33a752ef0c640a42d2d3a2cfdc3d
+>>>>>>> ldh7525:Assets/SimpleNaturePack/SimpleNaturePack_2020.3_HDRP_v1.24.unitypackage.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

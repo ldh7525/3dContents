@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Material.meta
 guid: 17135949ef28f694ab914f474da6d106
 folderAsset: yes
 DefaultImporter:
+========
+guid: b9de24523a11d714db3851b5f0f9d527
+PrefabImporter:
+>>>>>>>> ldh7525:Assets/ObjectPrefabs/Branch_01.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
