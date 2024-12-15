@@ -7,8 +7,8 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Lobby.unity
-    guid: c78ca6be196e7014c9213c8ec08acb7c
+    guid: 53b8093c41144914fa4c126dcc9a615e
   - enabled: 1
-    path: Assets/Scenes/DemoDayTmpLim.unity
-    guid: 304a5748b784bc241be3c08d67013b21
+    path: Assets/Scenes/Game.unity
+    guid: c938ee26149cd7e4b8baadc5cec54fc6
   m_configObjects: {}
