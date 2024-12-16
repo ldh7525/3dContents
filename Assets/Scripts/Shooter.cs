@@ -1,7 +1,6 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.ProBuilder;
+using UnityEngine.EventSystems;
 public class Shooter : MonoBehaviour
 {
     public GameObject[] projectilePrefabs;
@@ -58,7 +57,8 @@ public class Shooter : MonoBehaviour
 
         // LClick to Shoot
         // 입력 처리
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && isShootable && !GameManager.Instance.isPaused)
+        if (((Input.GetMouseButtonDown(0) && (EventSystem.current.IsPointerOverGameObject() == false)) || Input.GetKeyDown(KeyCode.Space))
+             && isShootable && (GameManager.Instance.isPaused == false))
         {
             shouldShoot = true;
         }

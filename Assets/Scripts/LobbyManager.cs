@@ -4,42 +4,45 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
-    // Ä«¸á Ç¥±â¹ý Àû¿ëµÈ º¯¼ö
+    // Ä«ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public Button gameStartButton;
-    public Button scoreRecordButton;
-    public Button settingsButton;
     public Button gameQuitButton;
     public FadeController fadeController;
+    private bool isStarting = false;
 
     private void Awake()
     {
 
 
-        // ¹öÆ° ÀÌº¥Æ® µî·Ï
+        // ï¿½ï¿½Æ° ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½
         gameStartButton.onClick.AddListener(StartGame);
-        scoreRecordButton.onClick.AddListener(StartGame);
-        settingsButton.onClick.AddListener(OpenSettings);
         gameQuitButton.onClick.AddListener(QuitGame);
     }
 
-    // °ÔÀÓ ½ÃÀÛ
-    private void StartGame()
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void StartGame()
     {
-
-        fadeController.ChangeScene("Game");
+        if (isStarting == false) 
+        {
+            isStarting = true;
+            fadeController.ChangeScene("Game");
+        }
     }
 
 
-    // ¼³Á¤ È­¸é
+    // ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½
     private void OpenSettings()
     {
-        Debug.Log("¼³Á¤ È­¸é ¿­±â!");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!");
     }
 
-    // °ÔÀÓ Á¾·á
-    private void QuitGame()
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void QuitGame()
     {
-        Debug.Log(1);
-        Application.Quit();
+        if (isStarting == false)
+        {
+            Debug.Log(1);
+            Application.Quit();
+        }
     }
 }
