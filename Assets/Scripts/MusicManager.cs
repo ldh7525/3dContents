@@ -22,7 +22,7 @@ public class MusicManager : MonoBehaviour
         audioSource.Play();
 
         // 첫 번째 음악 페이드 인 (최종 볼륨 0.2f)
-        yield return StartCoroutine(FadeIn(2.0f, 0.2f)); // 2초 동안 페이드 인
+        yield return StartCoroutine(FadeIn(2.0f, 0.08f)); // 2초 동안 페이드 인
 
         // 첫 번째 음악 끝나기 4초 전에 대기
         yield return new WaitForSeconds(clip1.length - 4);
@@ -36,7 +36,7 @@ public class MusicManager : MonoBehaviour
         audioSource.Play();
 
         // 두 번째 음악 페이드 인 (최종 볼륨 0.2f)
-        yield return StartCoroutine(FadeIn(2.0f, 0.2f)); // 2초 동안 페이드 인
+        yield return StartCoroutine(FadeIn(2.0f, 0.08f)); // 2초 동안 페이드 인
     }
 
     private IEnumerator FadeOut(float duration)

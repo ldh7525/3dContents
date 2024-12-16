@@ -32,5 +32,4 @@ public class ScoreManager : MonoBehaviour
         score += addedScore;
         scoreText.text = score.ToString();
     }
-
 }

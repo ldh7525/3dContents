@@ -18,6 +18,7 @@ public class Shooter : MonoBehaviour
     public GameObject dirLine;
     private bool shouldShoot = false;
 
+    public SoundEffect soundEffect; // ShootSound 재생을 위한 클래스
     public GameObject nextProjectile;
     public GameObject currentProjectile;
 
@@ -93,6 +94,12 @@ public class Shooter : MonoBehaviour
         rigid.constraints = RigidbodyConstraints.None; //let vegitables move
         Vector3 targetDirection = (targetPoint.position + new Vector3(0, elevation, 0) - transform.position).normalized; //base direction
         rigid.AddForce(targetDirection * launchForce, ForceMode.VelocityChange); //set velocity
+
+        // 사운드 재생
+        if (soundEffect != null)
+        {
+            soundEffect.PlayShootSound();
+        }
 
         VeggiesCombine veggiesCombine = projectile.GetComponent<VeggiesCombine>();
         if (veggiesCombine != null)

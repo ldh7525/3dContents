@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
 public class VeggiesCombine : MonoBehaviour
 {
+    public SoundEffect soundEffect;
     public GameObject nextFruit;
     public ParticleSystem particle_circle;
     private ParticleSystem particle_shiny;
@@ -21,6 +23,8 @@ public class VeggiesCombine : MonoBehaviour
 
     void Awake()
     {
+        soundEffect = GameObject.Find("SoundEffectController").GetComponent<SoundEffect>();
+
         rend = GetComponent<Renderer>();
         particle_shiny = GetComponentInChildren<ParticleSystem>();
         if (particle_shiny != null) particle_shiny.gameObject.SetActive(false);
@@ -98,6 +102,11 @@ public class VeggiesCombine : MonoBehaviour
             isCombined = true;
             otherVeggie.Combine();
             ScoreManager.Instance.AddScore(combinationScore);
+
+            if (soundEffect != null)
+            {
+                soundEffect.PlayCombineSound();
+            }
             Instantiate(particle_circle, Vector3.Lerp(transform.position, other.transform.position, 0.5f), Quaternion.identity).Play();
 
             if (nextFruit != null) 
