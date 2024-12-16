@@ -5,7 +5,7 @@ namespace FastMesh_Example
 {
     [ExecuteInEditMode]
     public class SceneViewText : MonoBehaviour
-    {
+    {/*
         public bool isShow = true;
         string text2 = "These 3D models, all created with \"Fast Mesh - 3D Asset Creation Tool\" (click)"; 
         Color backgroundColor = Color.white;
@@ -51,7 +51,7 @@ namespace FastMesh_Example
             // GUILayout.Label(text, style);
             // GUILayout.EndArea();
             Handles.EndGUI();
-        }
+        }*/
     }
 }
 
